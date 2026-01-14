@@ -1,16 +1,85 @@
-# React + Vite
+# E-Commerce Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Современное production-ready e-commerce приложение на React с использованием последних технологий.
 
-Currently, two official plugins are available:
+## Технологический стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Vite** - современный сборщик
+- **React 18+** - UI библиотека
+- **React Router v6** - маршрутизация
+- **TanStack Query v5** - управление серверным состоянием
+- **Zustand** - управление клиентским состоянием
+- **Tailwind CSS v3** - стилизация
+- **React Hook Form + Zod** - формы и валидация
+- **Framer Motion** - анимации
+- **i18next** - интернационализация
+- **Axios** - HTTP клиент
+- **Vite PWA Plugin** - Progressive Web App
 
-## React Compiler
+## Функциональность
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ✅ Аутентификация (регистрация, вход, выход)
+- ✅ Каталог товаров с фильтрацией и поиском
+- ✅ Корзина покупок
+- ✅ Оформление заказа
+- ✅ Профиль пользователя с историей заказов
+- ✅ Темная тема
+- ✅ Мультиязычность (Русский/English)
+- ✅ Адаптивный дизайн
+- ✅ PWA поддержка
+- ✅ Code splitting для оптимизации
 
-## Expanding the ESLint configuration
+## Установка и запуск
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск dev сервера
+npm run dev
+
+# Сборка для production
+npm run build
+
+# Просмотр production сборки
+npm run preview
+```
+
+## Структура проекта
+
+```
+src/
+├── api/              # API клиент и endpoints
+├── components/       # React компоненты
+│   ├── common/      # Переиспользуемые UI компоненты
+│   ├── layout/      # Layout компоненты
+│   ├── product/     # Компоненты товаров
+│   └── cart/        # Компоненты корзины
+├── hooks/           # Custom React hooks
+├── pages/           # Страницы приложения
+├── store/           # Zustand stores
+├── utils/           # Утилиты
+└── styles/          # Глобальные стили
+```
+
+## Переменные окружения
+
+Создайте файл `.env` на основе `.env.example`:
+
+```
+VITE_API_URL=http://localhost:3000/api
+VITE_WS_URL=ws://localhost:3000
+```
+
+## Особенности
+
+- **Code Splitting**: Страницы загружаются лениво для оптимизации
+- **Error Boundary**: Обработка ошибок на уровне приложения
+- **Responsive Design**: Mobile-first подход
+- **PWA**: Работает как нативное приложение
+- **Dark Mode**: Поддержка темной темы с сохранением в localStorage
+- **i18n**: Полная поддержка мультиязычности
+
+## Лицензия
+
+MIT
