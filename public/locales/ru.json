@@ -1,0 +1,85 @@
+{
+  "common": {
+    "home": "Главная",
+    "products": "Товары",
+    "cart": "Корзина",
+    "profile": "Профиль",
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти",
+    "search": "Поиск",
+    "addToCart": "В корзину",
+    "buyNow": "Купить сейчас",
+    "price": "Цена",
+    "total": "Итого",
+    "checkout": "Оформить заказ",
+    "continue": "Продолжить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "darkMode": "Темная тема",
+    "lightMode": "Светлая тема"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "name": "Имя",
+    "loginTitle": "Вход в систему",
+    "registerTitle": "Регистрация",
+    "alreadyHaveAccount": "Уже есть аккаунт?",
+    "dontHaveAccount": "Нет аккаунта?",
+    "loginSuccess": "Вы успешно вошли",
+    "registerSuccess": "Регистрация прошла успешно"
+  },
+  "products": {
+    "title": "Каталог товаров",
+    "noProducts": "Товары не найдены",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "category": "Категория",
+    "allCategories": "Все категории",
+    "description": "Описание",
+    "inStock": "В наличии",
+    "outOfStock": "Нет в наличии",
+    "quantity": "Количество"
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Корзина пуста",
+    "items": "товаров",
+    "remove": "Удалить",
+    "subtotal": "Промежуточный итог",
+    "shipping": "Доставка",
+    "tax": "Налог"
+  },
+  "checkout": {
+    "title": "Оформление заказа",
+    "shippingInfo": "Информация о доставке",
+    "paymentMethod": "Способ оплаты",
+    "orderSummary": "Итоги заказа",
+    "fullName": "Полное имя",
+    "address": "Адрес",
+    "city": "Город",
+    "postalCode": "Почтовый индекс",
+    "phone": "Телефон",
+    "cardNumber": "Номер карты",
+    "expiryDate": "Срок действия",
+    "cvv": "CVV",
+    "placeOrder": "Разместить заказ",
+    "orderPlaced": "Заказ размещен"
+  },
+  "profile": {
+    "title": "Профиль",
+    "orders": "Заказы",
+    "favorites": "Избранное",
+    "settings": "Настройки",
+    "orderHistory": "История заказов",
+    "noOrders": "Нет заказов"
+  }
+}
+
