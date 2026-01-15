@@ -1,9 +1,7 @@
 export const formatPrice = (price) => {
-  return new Intl.NumberFormat('kk-KZ', {
+  return new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency: 'KZT',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
   }).format(price)
 }
 

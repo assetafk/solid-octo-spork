@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { productsApi } from '../../api/products'
+import { mockProducts, mockCategories } from '../../data/mockProducts'
 import ProductCard from '../../components/product/ProductCard'
 import Loading from '../../components/common/Loading'
 import Input from '../../components/common/Input'
@@ -13,15 +14,21 @@ const Products = () => {
   const [category, setCategory] = useState('')
   const [sortBy, setSortBy] = useState('name')
 
-  const { data: products, isLoading } = useQuery({
+  const { data: products, isLoading, isError } = useQuery({
     queryKey: ['products', category, sortBy],
     queryFn: () => productsApi.getAll({ category, sortBy }),
+    retry: false, // Не повторять запрос при ошибке
   })
 
-  const { data: categories } = useQuery({
+  const { data: categories, isError: categoriesError } = useQuery({
     queryKey: ['categories'],
     queryFn: () => productsApi.getCategories(),
+    retry: false,
   })
+
+  // Используем mock данные если API не работает
+  const productsData = isError ? mockProducts : (products || [])
+  const categoriesData = categoriesError ? mockCategories : (categories || [])
 
   const debouncedSearch = useMemo(
     () =>
@@ -32,8 +39,15 @@ const Products = () => {
   )
 
   const filteredProducts = useMemo(() => {
-    if (!products) return []
-    let filtered = products
+    if (!productsData || productsData.length === 0) return []
+    let filtered = productsData
+
+    // Фильтрация по категории (если не используется API)
+    if (category && isError) {
+      filtered = filtered.filter(
+        (product) => product.category === category
+      )
+    }
 
     if (search) {
       filtered = filtered.filter(
@@ -43,10 +57,25 @@ const Products = () => {
       )
     }
 
-    return filtered
-  }, [products, search])
+    // Сортировка (если не используется API)
+    if (isError) {
+      filtered = [...filtered].sort((a, b) => {
+        switch (sortBy) {
+          case 'price-asc':
+            return a.price - b.price
+          case 'price-desc':
+            return b.price - a.price
+          case 'name':
+          default:
+            return a.name.localeCompare(b.name)
+        }
+      })
+    }
 
-  if (isLoading) {
+    return filtered
+  }, [productsData, search, category, sortBy, isError])
+
+  if (isLoading && !isError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loading size="lg" />
@@ -76,7 +105,7 @@ const Products = () => {
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             >
               <option value="">{t('products.allCategories')}</option>
-              {categories?.map((cat) => (
+              {categoriesData?.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
                 </option>

@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-400 via-primary-500 to-primary-600 text-white py-20">
+      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-soft-50 dark:bg-soft-900">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container-custom">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-gray-100">
             Почему выбирают нас

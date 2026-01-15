@@ -28,7 +28,7 @@ const Cart = () => {
     )
   }
 
-  const shipping = 2500
+  const shipping = 500
   const tax = total * 0.1
   const finalTotal = total + shipping + tax
 

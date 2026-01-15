@@ -4,32 +4,16 @@
 
 @layer base {
   * {
-    @apply transition-all duration-300 ease-in-out;
+    @apply transition-colors duration-200;
   }
   
   body {
-    @apply bg-soft-50 dark:bg-soft-900 text-soft-800 dark:text-soft-100;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-medium;
-    letter-spacing: -0.02em;
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
   }
 }
 
 @layer components {
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  .card-soft {
-    @apply bg-white dark:bg-soft-800 rounded-2xl shadow-soft border border-soft-100 dark:border-soft-700;
-  }
-  
-  .btn-soft {
-    @apply rounded-xl shadow-sm hover:shadow-md transition-all duration-300;
   }
 }

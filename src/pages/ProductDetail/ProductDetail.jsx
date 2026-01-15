@@ -2,12 +2,13 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { productsApi } from '../../api/products'
+import { mockProducts } from '../../data/mockProducts'
 import { useCart } from '../../hooks/useCart'
 import Loading from '../../components/common/Loading'
 import Button from '../../components/common/Button'
 import Card from '../../components/common/Card'
 import { formatPrice } from '../../utils'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -16,19 +17,30 @@ const ProductDetail = () => {
   const { addItem } = useCart()
   const [quantity, setQuantity] = useState(1)
 
-  const { data: product, isLoading } = useQuery({
+  const { data: product, isLoading, isError } = useQuery({
     queryKey: ['product', id],
     queryFn: () => productsApi.getById(id),
+    retry: false, // Не повторять запрос при ошибке
   })
 
+  // Используем mock данные если API не работает
+  const productData = useMemo(() => {
+    if (isError || !product) {
+      // Ищем товар в mockProducts по id
+      return mockProducts.find((p) => p.id === id)
+    }
+    return product
+  }, [product, isError, id])
+
   const handleAddToCart = () => {
+    if (!productData) return
     for (let i = 0; i < quantity; i++) {
-      addItem(product)
+      addItem(productData)
     }
     navigate('/cart')
   }
 
-  if (isLoading) {
+  if (isLoading && !isError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loading size="lg" />
@@ -36,7 +48,7 @@ const ProductDetail = () => {
     )
   }
 
-  if (!product) {
+  if (!productData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -54,52 +66,38 @@ const ProductDetail = () => {
           {/* Image */}
           <div>
             <img
-              src={product.image || 'https://via.placeholder.com/600'}
-              alt={product.name}
-              className="w-full h-auto rounded-2xl shadow-soft"
-              onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/600?text=No+Image'
-                e.target.onerror = null
-              }}
+              src={productData.image || 'https://via.placeholder.com/600'}
+              alt={productData.name}
+              className="w-full h-auto rounded-lg"
             />
           </div>
 
           {/* Details */}
           <div>
             <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-              {product.name}
+              {productData.name}
             </h1>
-            {product.sku && (
-              <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
-                Артикул: <span className="font-mono">{product.sku}</span>
-              </p>
-            )}
-            {product.brand && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Бренд: <span className="font-semibold">{product.brand}</span>
-              </p>
-            )}
             <p className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-6">
-              {formatPrice(product.price)}
+              {formatPrice(productData.price)}
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {product.description}
+              {productData.description}
             </p>
-            
-            {product.features && product.features.length > 0 && (
+
+            {productData.features && productData.features.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                  Характеристики:
+                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                  Особенности:
                 </h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-                  {product.features.map((feature, index) => (
+                <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                  {productData.features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                   ))}
                 </ul>
               </div>
             )}
 
-            {product.inStock ? (
+            {productData.inStock ? (
               <div className="mb-6">
                 <p className="text-green-600 dark:text-green-400 mb-4">
                   {t('products.inStock')}
@@ -139,12 +137,22 @@ const ProductDetail = () => {
               </p>
             )}
 
-            {product.category && (
+            {productData.category && (
               <Card className="mt-6">
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   <span className="font-semibold">{t('products.category')}:</span>{' '}
-                  {product.category}
+                  {productData.category}
                 </p>
+                {productData.brand && (
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    <span className="font-semibold">Бренд:</span> {productData.brand}
+                  </p>
+                )}
+                {productData.sku && (
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    <span className="font-semibold">Артикул:</span> {productData.sku}
+                  </p>
+                )}
               </Card>
             )}
           </div>

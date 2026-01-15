@@ -11,17 +11,17 @@ const Button = ({
   ...props
 }) => {
   const baseStyles =
-    'btn-soft font-medium rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-soft-800 disabled:opacity-50 disabled:cursor-not-allowed'
+    'font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
 
   const variants = {
     primary:
-      'bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-400 shadow-sm hover:shadow-md',
+      'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500',
     secondary:
-      'bg-soft-100 text-soft-800 dark:bg-soft-700 dark:text-soft-100 hover:bg-soft-200 dark:hover:bg-soft-600 focus:ring-soft-400',
+      'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 focus:ring-gray-500',
     outline:
-      'border border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:ring-primary-400 bg-transparent',
+      'border-2 border-primary-600 text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900 focus:ring-primary-500',
     danger:
-      'bg-red-400 text-white hover:bg-red-500 focus:ring-red-300 shadow-sm hover:shadow-md',
+      'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
   }
 
   const sizes = {

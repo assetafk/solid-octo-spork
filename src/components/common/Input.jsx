@@ -26,7 +26,7 @@ const Input = ({
       {label && (
         <label
           htmlFor={name}
-          className="block text-sm font-medium text-soft-700 dark:text-soft-300 mb-1.5"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
@@ -37,16 +37,16 @@ const Input = ({
         id={name}
         placeholder={placeholder}
         required={required}
-        className={`w-full px-4 py-2.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all ${
+        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${
           error
-            ? 'border-red-300 dark:border-red-500'
-            : 'border-soft-200 dark:border-soft-700'
-        } bg-white dark:bg-soft-800 text-soft-800 dark:text-soft-100 placeholder-soft-400`}
+            ? 'border-red-500 dark:border-red-400'
+            : 'border-gray-300 dark:border-gray-600'
+        } bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100`}
         {...inputProps}
         {...props}
       />
       {error && (
-        <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">{error}</p>
+        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error}</p>
       )}
     </div>
   )

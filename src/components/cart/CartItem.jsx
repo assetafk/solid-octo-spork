@@ -12,11 +12,7 @@ const CartItem = ({ item }) => {
       <img
         src={item.image || 'https://via.placeholder.com/100'}
         alt={item.name}
-        className="w-20 h-20 object-cover rounded-xl"
-        onError={(e) => {
-          e.target.src = 'https://via.placeholder.com/100?text=No+Image'
-          e.target.onerror = null
-        }}
+        className="w-20 h-20 object-cover rounded-lg"
       />
       <div className="flex-1">
         <h3 className="font-semibold text-gray-900 dark:text-gray-100">{item.name}</h3>
