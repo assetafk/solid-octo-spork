@@ -84,25 +84,26 @@ const Products = () => {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 md:py-16">
       <div className="container-custom">
-        <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
+        <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gray-900 dark:text-gray-100">
           {t('products.title')}
         </h1>
 
         {/* Filters and Search */}
-        <div className="mb-8 space-y-4 md:flex md:space-y-0 md:space-x-4">
+        <div className="mb-12 space-y-4 md:flex md:space-y-0 md:space-x-4">
           <div className="flex-1">
             <Input
+              name="search"
               placeholder={t('common.search')}
               onChange={(e) => debouncedSearch(e.target.value)}
             />
           </div>
-          <div className="md:w-48">
+          <div className="md:w-56">
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-smooth text-sm"
             >
               <option value="">{t('products.allCategories')}</option>
               {categoriesData?.map((cat) => (
@@ -112,11 +113,11 @@ const Products = () => {
               ))}
             </select>
           </div>
-          <div className="md:w-48">
+          <div className="md:w-56">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-smooth text-sm"
             >
               <option value="name">{t('products.sort')}: Имя</option>
               <option value="price-asc">{t('products.sort')}: {t('common.price')} ↑</option>
@@ -127,13 +128,13 @@ const Products = () => {
 
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
+          <div className="text-center py-20">
+            <p className="text-gray-500 dark:text-gray-400 text-lg">
               {t('products.noProducts')}
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

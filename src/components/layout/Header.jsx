@@ -20,31 +20,34 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-30">
+    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 sticky top-0 z-30 minimal-shadow">
       <nav className="container-custom">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+        <div className="flex items-center justify-between h-20">
+          <Link 
+            to="/" 
+            className="text-2xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-smooth"
+          >
             E-Commerce
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
+              className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-smooth text-sm font-medium"
             >
               {t('common.home')}
             </Link>
             <Link
               to="/products"
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
+              className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-smooth text-sm font-medium"
             >
               {t('common.products')}
             </Link>
             {isAuthenticated && (
               <Link
                 to="/profile"
-                className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
+                className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-smooth text-sm font-medium"
               >
                 {t('common.profile')}
               </Link>
@@ -52,25 +55,25 @@ const Header = () => {
           </div>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             {/* Language switcher */}
-            <div className="hidden sm:flex items-center space-x-2">
+            <div className="hidden sm:flex items-center space-x-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
               <button
                 onClick={() => changeLanguage('ru')}
-                className={`px-2 py-1 rounded ${
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-smooth ${
                   i18n.language === 'ru'
-                    ? 'bg-primary-600 text-white'
-                    : 'text-gray-700 dark:text-gray-300'
+                    ? 'bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >
                 RU
               </button>
               <button
                 onClick={() => changeLanguage('en')}
-                className={`px-2 py-1 rounded ${
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-smooth ${
                   i18n.language === 'en'
-                    ? 'bg-primary-600 text-white'
-                    : 'text-gray-700 dark:text-gray-300'
+                    ? 'bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >
                 EN
@@ -80,7 +83,7 @@ const Header = () => {
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+              className="p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-smooth text-gray-600 dark:text-gray-400"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
@@ -101,9 +104,9 @@ const Header = () => {
             {/* Cart */}
             <Link
               to="/cart"
-              className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+              className="relative p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-800 transition-smooth text-gray-600 dark:text-gray-400"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -112,7 +115,7 @@ const Header = () => {
                 />
               </svg>
               {itemCount > 0 && (
-                <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-primary-600 dark:bg-primary-500 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center shadow-sm">
                   {itemCount}
                 </span>
               )}
@@ -120,8 +123,8 @@ const Header = () => {
 
             {/* Auth buttons */}
             {isAuthenticated ? (
-              <div className="hidden sm:flex items-center space-x-2">
-                <span className="text-sm text-gray-700 dark:text-gray-300">
+              <div className="hidden sm:flex items-center space-x-3">
+                <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                   {user?.name || user?.email}
                 </span>
                 <Button variant="outline" size="sm" onClick={logout}>
@@ -145,7 +148,7 @@ const Header = () => {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="md:hidden p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-800 transition-smooth text-gray-600 dark:text-gray-400"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -162,18 +165,18 @@ const Header = () => {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
-            <div className="flex flex-col space-y-2">
+          <div className="md:hidden py-4 border-t border-gray-100 dark:border-gray-800 animate-slide-down">
+            <div className="flex flex-col space-y-1">
               <Link
                 to="/"
-                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                className="px-4 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-smooth text-sm font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t('common.home')}
               </Link>
               <Link
                 to="/products"
-                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                className="px-4 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-smooth text-sm font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t('common.products')}
@@ -182,7 +185,7 @@ const Header = () => {
                 <>
                   <Link
                     to="/profile"
-                    className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                    className="px-4 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-smooth text-sm font-medium"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t('common.profile')}
@@ -192,7 +195,7 @@ const Header = () => {
                       logout()
                       setMobileMenuOpen(false)
                     }}
-                    className="px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                    className="px-4 py-2.5 text-left text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-dark-800 rounded-lg transition-smooth text-sm font-medium"
                   >
                     {t('common.logout')}
                   </button>
@@ -204,7 +207,7 @@ const Header = () => {
                       navigate('/login')
                       setMobileMenuOpen(false)
                     }}
-                    className="px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                    className="px-4 py-2.5 text-left text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-dark-800 rounded-lg transition-smooth text-sm font-medium"
                   >
                     {t('common.login')}
                   </button>
@@ -213,7 +216,7 @@ const Header = () => {
                       navigate('/register')
                       setMobileMenuOpen(false)
                     }}
-                    className="px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                    className="px-4 py-2.5 text-left text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-dark-800 rounded-lg transition-smooth text-sm font-medium"
                   >
                     {t('common.register')}
                   </button>

@@ -13,14 +13,16 @@ const Cart = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen py-8">
+      <div className="min-h-screen py-12 md:py-16">
         <div className="container-custom">
-          <Card className="text-center py-12">
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+          <Card className="text-center py-16 md:py-20">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
               {t('cart.empty')}
             </h2>
             <Link to="/products">
-              <Button variant="primary">{t('common.products')}</Button>
+              <Button variant="primary" size="lg">
+                {t('common.products')}
+              </Button>
             </Link>
           </Card>
         </div>
@@ -33,9 +35,9 @@ const Cart = () => {
   const finalTotal = total + shipping + tax
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 md:py-16">
       <div className="container-custom">
-        <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
+        <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gray-900 dark:text-gray-100">
           {t('cart.title')}
         </h1>
 
@@ -43,12 +45,12 @@ const Cart = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <Card>
-              <div className="space-y-4">
+              <div className="space-y-0 divide-y divide-gray-100 dark:divide-gray-800">
                 {items.map((item) => (
                   <CartItem key={item.id} item={item} />
                 ))}
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
                 <Button variant="danger" onClick={clearCart}>
                   {t('common.delete')} все
                 </Button>
@@ -58,30 +60,30 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div>
-            <Card>
-              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+            <Card className="sticky top-24">
+              <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 {t('checkout.orderSummary')}
               </h2>
-              <div className="space-y-2 mb-4">
-                <div className="flex justify-between">
+              <div className="space-y-4 mb-6">
+                <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">
                     {t('cart.subtotal')}
                   </span>
-                  <span className="font-semibold">{formatPrice(total)}</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">{formatPrice(total)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">
                     {t('cart.shipping')}
                   </span>
-                  <span className="font-semibold">{formatPrice(shipping)}</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">{formatPrice(shipping)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">
                     {t('cart.tax')}
                   </span>
-                  <span className="font-semibold">{formatPrice(tax)}</span>
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">{formatPrice(tax)}</span>
                 </div>
-                <div className="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2">
+                <div className="border-t border-gray-100 dark:border-gray-800 pt-4 mt-4">
                   <div className="flex justify-between">
                     <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
                       {t('common.total')}
@@ -95,6 +97,7 @@ const Cart = () => {
               <Button
                 variant="primary"
                 className="w-full"
+                size="lg"
                 onClick={() => navigate('/checkout')}
               >
                 {t('common.checkout')}

@@ -18,51 +18,49 @@ const ProductCard = ({ product }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
     >
-      <Link to={`/products/${product.id}`}>
-        <Card hover className="h-full flex flex-col">
-          <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-700 mb-4">
+      <Link to={`/products/${product.id}`} className="block h-full">
+        <Card hover className="h-full flex flex-col overflow-hidden">
+          <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 mb-5 -m-6 mb-5">
             <img
               src={product.image || 'https://via.placeholder.com/300'}
               alt={product.name}
-              className="h-48 w-full object-cover object-center group-hover:opacity-75"
+              className="h-64 w-full object-cover object-center transition-smooth group-hover:scale-105"
               loading="lazy"
             />
           </div>
-          <div className="flex-1 flex flex-col">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">
+          <div className="flex-1 flex flex-col px-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2 leading-tight">
               {product.name}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1 line-clamp-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-5 flex-1 line-clamp-2 leading-relaxed">
               {product.description}
             </p>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-4">
               <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                 {formatPrice(product.price)}
               </span>
               {product.inStock ? (
-                <span className="text-sm text-green-600 dark:text-green-400">
+                <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
                   {t('products.inStock')}
                 </span>
               ) : (
-                <span className="text-sm text-red-600 dark:text-red-400">
+                <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">
                   {t('products.outOfStock')}
                 </span>
               )}
             </div>
-            <div className="mt-4 flex gap-2">
-              <Button
-                variant="primary"
-                className="flex-1"
-                onClick={handleAddToCart}
-                disabled={!product.inStock}
-              >
-                {t('common.addToCart')}
-              </Button>
-            </div>
+            <Button
+              variant="primary"
+              className="w-full"
+              onClick={handleAddToCart}
+              disabled={!product.inStock}
+            >
+              {t('common.addToCart')}
+            </Button>
           </div>
         </Card>
       </Link>
